@@ -1,8 +1,12 @@
 <?php
-
+use App\Http\Controllers\FilmController;
+use App\Models\Film;
+use App\Http\Controllers\RezervareController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Rezervare;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
+
 Route::get('/', function () {
     return view('welcome',[
         'nume' => "Cristina",
@@ -31,28 +35,28 @@ Route::get('/galerie', function () {
 
     ]);
 });
-Route::get('/insert-model', function () 
-{
+Route::get('/insert-model', [RezervareController::class, "getRezervare"]);  
 
-for($i=0; $i<10; $i++ )
-{
-    
-      $rezervare_query = Rezervare::query()->create([ 
-        "nume"=> "cristina",
-        "email"=>"cristina@gmail.com",
-        "telefon"=>"0787823875",
-        "filmul"=> "Soft_Tehnica",
-        "data_rezervare"=>Carbon::now()->addDays(rand(0, 30)) 
 
-      ]);
-}
-    return "10 rezervari inserate cu succes!";
+
+    Route::get ('/display-model',[ RezervareController::class, "create"] );
+
+
+
+Route::get('/formular', function() {
+    return view('formular',);
 });
 
+Route::post('/formular', [RezervareController::class, "Store"]);
 
-    Route::get ('/display-model', function() {
-        $rezervari=Rezervare::all();
-        return view('rezervari.index', compact('rezervari'));
 
+
+Route::get('/filme', [FilmController::class, 'index'])->name('filme.index');
+Route::get('/filme/create', [FilmController::class, 'create'])->name('filme.create');
+
+Route::post('/filme', [FilmController::class, 'store'])->name('filme.store');
+ Route::get('/insert-filme', function () {
+    \App\Models\Film::factory()->count(10)->create();
+    return '10 filme adăugate!';
 });
-
+Route::get("/filme/{film}/sterge", [FilmController::class, 'destroy'])->name('filme.destroy');

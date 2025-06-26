@@ -32,3 +32,13 @@ return new class extends Migration
         Schema::dropIfExists('rezervari');
     }
 };
+
+Schema::create('students', function (Blueprint $table) {
+    $table->id();
+    $table->string('nume');
+    $table->string('email');
+    $table->integer('telefon');
+    $table->string('filmul');
+    $table->timestamp('data_rezervare');
+    $table->timestamps();
+});

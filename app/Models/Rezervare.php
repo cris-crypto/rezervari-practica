@@ -14,5 +14,4 @@ class Rezervare extends Model
         'filmul',
         'data_rezervare'
     ];
-    
 }
