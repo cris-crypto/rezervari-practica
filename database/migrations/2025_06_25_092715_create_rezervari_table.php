@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\ForeignKeyDefinition;
+
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -14,17 +15,23 @@ return new class extends Migration
     {
         Schema::create('rezervari', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-           $table->string('nume');
-           $table->string('email');
+            $table->unsignedBigInteger('user_id'); 
+            $table->string('nume');
+            $table->string('email');
             $table->string('telefon');
             $table->string('filmul');
             $table->timestamp('data_rezervare');
+            $table->timestamps();
 
+
+            $table->foreign('user_id')
+                  ->references('id')
+                  ->on('users')
+                  ->onDelete('cascade');
         });
     }
 
-    /**
+        /**
      * Reverse the migrations.
      */
     public function down(): void
@@ -33,12 +40,3 @@ return new class extends Migration
     }
 };
 
-Schema::create('students', function (Blueprint $table) {
-    $table->id();
-    $table->string('nume');
-    $table->string('email');
-    $table->integer('telefon');
-    $table->string('filmul');
-    $table->timestamp('data_rezervare');
-    $table->timestamps();
-});

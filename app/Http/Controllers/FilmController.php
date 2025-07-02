@@ -36,7 +36,8 @@ class FilmController extends Controller
         $film = Film::findOrFail($film);
         $film->delete();
         return redirect()->route('filme.index');
-}} 
+    }
+}
 
 
 

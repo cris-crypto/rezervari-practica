@@ -45,4 +45,13 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function rezervari()
+{
+    return $this->hasMany(\App\Models\Rezervare::class);
 }
+
+}
+
+
+
+

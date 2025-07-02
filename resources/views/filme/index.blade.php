@@ -42,7 +42,6 @@
                 <a href="{{ route('filme.destroy', $film->id) }}" class="btn-reservations">Sterge film</a>
                 </a>
                 <br>
-               
                 
             </div>
         @empty

@@ -17,7 +17,9 @@ class RezervareController extends Controller
             'email' => $request->email,
             'telefon' => $request->telefon,
             'filmul' => $request->filmul,
-            'data_rezervare' => Carbon::parse($request->data_rezervare)
+            'data_rezervare' => Carbon::parse($request->data_rezervare),
+            'user_id' => $request->user()->id, 
+
         ]);
 
         return redirect('/display-model');
@@ -28,7 +30,7 @@ class RezervareController extends Controller
     public function create()
     {
         $rezervari = Rezervare::all();
-        return view('display-model', ['rezervari' => $rezervari]);
+        return view('rezervari.index', ['rezervari' => $rezervari]);
     }
 
     public function getRezervare()
